@@ -16,7 +16,7 @@ Requirements
 Building The Provider
 ---------------------
 
-Clone repository to: `$GOPATH/src/github.com/terraform-providers/terraform-provider-grafana`
+Clone repository to: `$GOPATH/src/github.com/cryptogrampus/terraform-provider-grafana`
 
 ```sh
 $ mkdir -p $GOPATH/src/github.com/terraform-providers; cd $GOPATH/src/github.com/terraform-providers
@@ -26,7 +26,7 @@ $ git clone git@github.com:terraform-providers/terraform-provider-grafana
 Enter the provider directory and build the provider
 
 ```sh
-$ cd $GOPATH/src/github.com/terraform-providers/terraform-provider-grafana
+$ cd $GOPATH/src/github.com/cryptogrampus/terraform-provider-grafana
 $ make build
 ```
 

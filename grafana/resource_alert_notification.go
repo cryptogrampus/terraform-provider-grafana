@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/hashicorp/terraform/helper/schema"
-	gapi "github.com/nytm/go-grafana-api"
+	gapi "github.com/cryptogrampus/go-grafana-api"
 
 )
 

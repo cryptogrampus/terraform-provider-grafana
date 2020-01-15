@@ -1,4 +1,4 @@
-module github.com/nytm/go-grafana-api
+module github.com/cryptogrampus/go-grafana-api
 
 go 1.12
 

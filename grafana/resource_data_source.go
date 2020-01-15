@@ -7,8 +7,8 @@ import (
 
 	"github.com/hashicorp/terraform/helper/schema"
 
-	gapi "github.com/nytm/go-grafana-api"
-	sdk "github.com/grafana-tools/sdk"
+	gapi "github.com/cryptogrampus/go-grafana-api"
+	// sdk "github.com/grafana-tools/sdk"
 )
 
 func ResourceDataSource() *schema.Resource {
@@ -181,7 +181,7 @@ func CreateDataSource(d *schema.ResourceData, meta interface{}) error {
 
 // UpdateDataSource updates a Grafana datasource
 func UpdateDataSource(d *schema.ResourceData, meta interface{}) error {
-	client := meta.(*sdk.NewClient)
+	client := meta.(*gapi.Client)
 
 	dataSource, err := makeDataSource(d)
 	if err != nil {
@@ -193,7 +193,7 @@ func UpdateDataSource(d *schema.ResourceData, meta interface{}) error {
 
 // ReadDataSource reads a Grafana datasource
 func ReadDataSource(d *schema.ResourceData, meta interface{}) error {
-	client := meta.(*sdk.NewClient)
+	client := meta.(*gapi.Client)
 
 	idStr := d.Id()
 	id, err := strconv.ParseInt(idStr, 10, 64)
@@ -229,7 +229,7 @@ func ReadDataSource(d *schema.ResourceData, meta interface{}) error {
 
 // DeleteDataSource deletes a Grafana datasource
 func DeleteDataSource(d *schema.ResourceData, meta interface{}) error {
-	client := meta.(*sdk.NewClient)
+	client := meta.(*gapi.Client)
 
 	idStr := d.Id()
 	id, err := strconv.ParseInt(idStr, 10, 64)
@@ -240,7 +240,7 @@ func DeleteDataSource(d *schema.ResourceData, meta interface{}) error {
 	return client.DeleteDataSource(id)
 }
 
-func makeDataSource(d *schema.ResourceData) (*sdk.DataSource, error) {
+func makeDataSource(d *schema.ResourceData) (*gapi.DataSource, error) {
 	idStr := d.Id()
 	var id int64
 	var err error
@@ -248,9 +248,8 @@ func makeDataSource(d *schema.ResourceData) (*sdk.DataSource, error) {
 		id, err = strconv.ParseInt(idStr, 10, 64)
 	}
 
-	return &sdk.DataSource{
+	return &gapi.DataSource{
 		Id:                id,
-		OrgID:             1,
 		Name:              d.Get("name").(string),
 		Type:              d.Get("type").(string),
 		Access:            d.Get("access_mode").(string),
@@ -273,6 +272,13 @@ func makeJSONData(d *schema.ResourceData) gapi.JSONData {
 		DefaultRegion:           d.Get("json_data.0.default_region").(string),
 		CustomMetricsNamespaces: d.Get("json_data.0.custom_metrics_namespaces").(string),
 		AssumeRoleArn:           d.Get("json_data.0.assume_role_arn").(string),
+
+		AzureLogAnalyticsSameAs: d.Get("json_data.0.azure_log_analytics_same_as").(bool),
+		ClientId: d.Get("json_data.0.client_id").(string),
+		CloudName: d.Get("json_data.0.cloud_name").(string),
+		LogAnalyticsDefaultWorkspace: d.Get("json_data.0.log_analytics_default_workspace").(string),
+		SubscriptionId: d.Get("json_data.0.subscription_id").(string),
+		TenantId: d.Get("json_data.0.tenant_id").(string),
 	}
 }
 
@@ -280,5 +286,6 @@ func makeSecureJSONData(d *schema.ResourceData) gapi.SecureJSONData {
 	return gapi.SecureJSONData{
 		AccessKey: d.Get("secure_json_data.0.access_key").(string),
 		SecretKey: d.Get("secure_json_data.0.secret_key").(string),
+		ClientSecret: d.Get("secure_json_data.0.client_secret").(string),
 	}
 }
