@@ -38,6 +38,24 @@ func TestAccDataSource_basic(t *testing.T) {
 					),
 				),
 			},
+			{
+				Config: testAccDataSourceConfig_basic,
+				Check: resource.ComposeTestCheckFunc(
+					testAccDataSourceCheckExists("grafana_data_source.test_azuremonitor", &dataSource),
+					resource.TestCheckResourceAttr(
+						"grafana_data_source.test_azuremonitor", "type", "grafana-azure-monitor-datasource",
+					),
+					resource.TestCheckResourceAttr(
+						"grafana_data_source.test_azuremonitor", "client_id", "client_id",
+					),
+					resource.TestCheckResourceAttr(
+						"grafana_data_source.test_azuremonitor", "basic_auth_password", "basic_password",
+					),
+					resource.TestMatchResourceAttr(
+						"grafana_data_source.test_azuremonitor", "id", regexp.MustCompile(`\d+`),
+					),
+				),
+			},
 		},
 	})
 }
