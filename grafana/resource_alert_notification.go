@@ -7,6 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform/helper/schema"
 	gapi "github.com/nytm/go-grafana-api"
+
 )
 
 func ResourceAlertNotification() *schema.Resource {

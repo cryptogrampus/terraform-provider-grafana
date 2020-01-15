@@ -8,6 +8,7 @@ import (
 	"github.com/hashicorp/terraform/helper/schema"
 
 	gapi "github.com/nytm/go-grafana-api"
+	sdk "github.com/grafana-tools/sdk"
 )
 
 func ResourceDataSource() *schema.Resource {
@@ -78,17 +79,43 @@ func ResourceDataSource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"auth_type": {
 							Type:     schema.TypeString,
-							Required: true,
+							Optional: true,
+							Default:  "",
 						},
 						"default_region": {
 							Type:     schema.TypeString,
-							Required: true,
+							Optional: true,
+							Default:  "",
 						},
 						"custom_metrics_namespaces": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
 						"assume_role_arn": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"azure_log_analytics_same_as": {
+							Type:     schema.TypeBool,
+							Optional: true,
+						},
+						"client_id": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"cloud_name": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"log_analytics_default_workspace": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"subscription_id": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"tenant_id": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
@@ -104,11 +131,15 @@ func ResourceDataSource() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"access_key": {
 							Type:     schema.TypeString,
-							Required: true,
+							Optional: true,
 						},
 						"secret_key": {
 							Type:     schema.TypeString,
-							Required: true,
+							Optional: true,
+						},
+						"client_secret": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
 					},
 				},
@@ -150,7 +181,7 @@ func CreateDataSource(d *schema.ResourceData, meta interface{}) error {
 
 // UpdateDataSource updates a Grafana datasource
 func UpdateDataSource(d *schema.ResourceData, meta interface{}) error {
-	client := meta.(*gapi.Client)
+	client := meta.(*sdk.NewClient)
 
 	dataSource, err := makeDataSource(d)
 	if err != nil {
@@ -162,7 +193,7 @@ func UpdateDataSource(d *schema.ResourceData, meta interface{}) error {
 
 // ReadDataSource reads a Grafana datasource
 func ReadDataSource(d *schema.ResourceData, meta interface{}) error {
-	client := meta.(*gapi.Client)
+	client := meta.(*sdk.NewClient)
 
 	idStr := d.Id()
 	id, err := strconv.ParseInt(idStr, 10, 64)
@@ -198,7 +229,7 @@ func ReadDataSource(d *schema.ResourceData, meta interface{}) error {
 
 // DeleteDataSource deletes a Grafana datasource
 func DeleteDataSource(d *schema.ResourceData, meta interface{}) error {
-	client := meta.(*gapi.Client)
+	client := meta.(*sdk.NewClient)
 
 	idStr := d.Id()
 	id, err := strconv.ParseInt(idStr, 10, 64)
@@ -209,7 +240,7 @@ func DeleteDataSource(d *schema.ResourceData, meta interface{}) error {
 	return client.DeleteDataSource(id)
 }
 
-func makeDataSource(d *schema.ResourceData) (*gapi.DataSource, error) {
+func makeDataSource(d *schema.ResourceData) (*sdk.DataSource, error) {
 	idStr := d.Id()
 	var id int64
 	var err error
@@ -217,19 +248,20 @@ func makeDataSource(d *schema.ResourceData) (*gapi.DataSource, error) {
 		id, err = strconv.ParseInt(idStr, 10, 64)
 	}
 
-	return &gapi.DataSource{
+	return &sdk.DataSource{
 		Id:                id,
+		OrgID:             1,
 		Name:              d.Get("name").(string),
 		Type:              d.Get("type").(string),
-		URL:               d.Get("url").(string),
 		Access:            d.Get("access_mode").(string),
-		Database:          d.Get("database_name").(string),
-		User:              d.Get("username").(string),
+		URL:               d.Get("url").(string),
 		Password:          d.Get("password").(string),
-		IsDefault:         d.Get("is_default").(bool),
+		User:              d.Get("username").(string),
+		Database:          d.Get("database_name").(string),
 		BasicAuth:         d.Get("basic_auth_enabled").(bool),
 		BasicAuthUser:     d.Get("basic_auth_username").(string),
 		BasicAuthPassword: d.Get("basic_auth_password").(string),
+		IsDefault:         d.Get("is_default").(bool),
 		JSONData:          makeJSONData(d),
 		SecureJSONData:    makeSecureJSONData(d),
 	}, err
