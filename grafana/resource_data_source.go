@@ -273,19 +273,19 @@ func makeJSONData(d *schema.ResourceData) gapi.JSONData {
 		CustomMetricsNamespaces: d.Get("json_data.0.custom_metrics_namespaces").(string),
 		AssumeRoleArn:           d.Get("json_data.0.assume_role_arn").(string),
 
-		AzureLogAnalyticsSameAs: d.Get("json_data.0.azure_log_analytics_same_as").(bool),
-		ClientId: d.Get("json_data.0.client_id").(string),
-		CloudName: d.Get("json_data.0.cloud_name").(string),
+		AzureLogAnalyticsSameAs:      d.Get("json_data.0.azure_log_analytics_same_as").(bool),
+		ClientId:                     d.Get("json_data.0.client_id").(string),
+		CloudName:                    d.Get("json_data.0.cloud_name").(string),
 		LogAnalyticsDefaultWorkspace: d.Get("json_data.0.log_analytics_default_workspace").(string),
-		SubscriptionId: d.Get("json_data.0.subscription_id").(string),
-		TenantId: d.Get("json_data.0.tenant_id").(string),
+		SubscriptionId:               d.Get("json_data.0.subscription_id").(string),
+		TenantId:                     d.Get("json_data.0.tenant_id").(string),
 	}
 }
 
 func makeSecureJSONData(d *schema.ResourceData) gapi.SecureJSONData {
 	return gapi.SecureJSONData{
-		AccessKey: d.Get("secure_json_data.0.access_key").(string),
-		SecretKey: d.Get("secure_json_data.0.secret_key").(string),
+		AccessKey:    d.Get("secure_json_data.0.access_key").(string),
+		SecretKey:    d.Get("secure_json_data.0.secret_key").(string),
 		ClientSecret: d.Get("secure_json_data.0.client_secret").(string),
 	}
 }
