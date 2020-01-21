@@ -119,6 +119,71 @@ func ResourceDataSource() *schema.Resource {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
+
+						"username": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+
+						"password": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+
+						"trends": {
+							Type:     schema.TypeBoolean,
+							Optional: true,
+						},
+
+						"trendsFrom": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+
+						"trendsRange": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+
+						"cacheTTL": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+
+						"alerting": {
+							Type:     schema.TypeBoolean,
+							Optional: true,
+						},
+
+						"addThresholds": {
+							Type:     schema.TypeBoolean,
+							Optional: true,
+						},
+
+						"alertingMinSeverity": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+
+						"disableReadOnlyUsersAck": {
+							Type:     schema.TypeBoolean,
+							Optional: true,
+						},
+
+						"dbConnectionEnable": {
+							Type:     schema.TypeBoolean,
+							Optional: true,
+						},
+
+						"dbConnectionDatasourceName": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+
+						"dbConnectionRetentionPolicy": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
 					},
 				},
 			},
