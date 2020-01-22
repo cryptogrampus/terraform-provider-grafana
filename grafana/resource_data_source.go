@@ -131,56 +131,56 @@ func ResourceDataSource() *schema.Resource {
 						},
 
 						"trends": {
-							Type:     schema.TypeBoolean,
+							Type:     schema.TypeBool,
 							Optional: true,
 						},
 
-						"trendsFrom": {
+						"trends_from": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
 
-						"trendsRange": {
+						"trends_range": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
 
-						"cacheTTL": {
+						"cache_ttl": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
 
 						"alerting": {
-							Type:     schema.TypeBoolean,
+							Type:     schema.TypeBool,
 							Optional: true,
 						},
 
-						"addThresholds": {
-							Type:     schema.TypeBoolean,
+						"add_thresholds": {
+							Type:     schema.TypeBool,
 							Optional: true,
 						},
 
-						"alertingMinSeverity": {
+						"alerting_min_severity": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
 
-						"disableReadOnlyUsersAck": {
-							Type:     schema.TypeBoolean,
+						"disable_readonly_users_ack": {
+							Type:     schema.TypeBool,
 							Optional: true,
 						},
 
-						"dbConnectionEnable": {
-							Type:     schema.TypeBoolean,
+						"db_connection_enable": {
+							Type:     schema.TypeBool,
 							Optional: true,
 						},
 
-						"dbConnectionDatasourceName": {
+						"db_connection_datasource_name": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
 
-						"dbConnectionRetentionPolicy": {
+						"db_connection_retention_policy": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
