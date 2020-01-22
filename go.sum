@@ -79,6 +79,8 @@ github.com/coreos/go-systemd v0.0.0-20181012123002-c6f51f82210d/go.mod h1:F5haX7
 github.com/coreos/pkg v0.0.0-20180928190104-399ea9e2e55f/go.mod h1:E3G3o1h8I7cfcXa63jLwjI0eiQQMgzzUDFVpN/nH/eA=
 github.com/cryptogrampus/go-grafana-api v0.2.1 h1:qVJKoyjZN/cWz6YKiZBk6D0UGEv1otEbO/Fl7ox3GIM=
 github.com/cryptogrampus/go-grafana-api v0.2.1/go.mod h1:U9HXXYizfOg1xVEbbby6nG1dDVUq9xWe0UL5/an4e8c=
+github.com/cryptogrampus/go-grafana-api v0.2.2 h1:Ghr/1QGWrfjRJe0Gqx98NX1oEriFiKYeLxRRW3VlIRw=
+github.com/cryptogrampus/go-grafana-api v0.2.2/go.mod h1:U9HXXYizfOg1xVEbbby6nG1dDVUq9xWe0UL5/an4e8c=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
